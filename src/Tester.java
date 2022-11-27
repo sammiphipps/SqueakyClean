@@ -15,7 +15,8 @@ public class Tester {
 		String ommitNotLetters = SqueakyClean.clean("a1😀2😀3😀b"); 
 		System.out.println(ommitNotLetters); 
 		
-		
+		String greekLetters = SqueakyClean.clean("MyΟβιεγτFinder");
+		System.out.println(greekLetters); 
 	}
 
 }

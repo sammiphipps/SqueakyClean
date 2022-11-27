@@ -3,10 +3,12 @@ import java.util.regex.Pattern;
 
 public class SqueakyClean {
 	private static String replaceSpace(String word) {
+		//replace empty space with underscore
 		return word.replaceAll(" ", "_"); 
 	}
 	
 	private static String replaceControlCharacters(String word) {
+		//replace all control characters with the words CTRL
 		return  word.replaceAll("\\p{Cntrl}", "CTRL");
 	}
 	
@@ -27,15 +29,21 @@ public class SqueakyClean {
 	}
 	
 	private static String omitNotLetters(String word) {
+		//remove all non letters
 		return word.replaceAll("[^A-Za-z]", ""); 
 	}
 	
-	public static String clean(String word) {
-		//replace empty spaces with underscore 
+	private static String omitCertainGreekLetters(String word) {
+		//remove all greek lower case letters
+		return word.replaceAll("[\\u03B1-\\u03C9]", ""); 
+	}
+	
+	public static String clean(String word) { 
 		String noSpace = replaceSpace(word); 
 		String removeControlChar = replaceControlCharacters(noSpace); 
 		String camelCase = convertKebabCase(removeControlChar); 
 		String onlyLetters = omitNotLetters(camelCase); 
-		return onlyLetters; 
+		String removeMajorityGreekLetters = omitCertainGreekLetters(onlyLetters); 
+		return removeMajorityGreekLetters; 
 	}
 }
